@@ -1,0 +1,18 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 23.6.0   # Встановлює Node.js версії 23.6.0
+        - nvm use 23.6.0       # Використовує Node.js версії 23.6.0
+        - npm ci               # Встановлює залежності
+    build:
+      commands:
+        - npm run build        # Запускає команду для побудови проєкту
+  artifacts:
+    baseDirectory: build    # Шлях до директорії з артефактами
+    files:
+      - '**/*'               # Всі файли для деплою
+  cache:
+    paths:
+      - node_modules/**/*    # Шлях до кешу
