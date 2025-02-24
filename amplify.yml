@@ -10,7 +10,7 @@ frontend:
       commands:
         - npm run build        # Запускає команду для побудови проєкту
   artifacts:
-    baseDirectory: build    # Шлях до директорії з артефактами
+    baseDirectory: dist    # Шлях до директорії з артефактами
     files:
       - '**/*'               # Всі файли для деплою
   cache:
