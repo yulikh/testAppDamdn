@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.no-border-input:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -55,5 +61,16 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

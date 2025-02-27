@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+    .chat-bubble-mobile-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .chat-bubble-mobile-button {
+        align-self: flex-end;
+    }
+    
+}

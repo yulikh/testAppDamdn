@@ -7,10 +7,10 @@ import "./Sidebar.css";
 import AccordionItemComponent from "./AccordionItem";
 import AccordionContentWithDelete from "./AccordionContentWithDelete";
 import AccordionContentWithAccordion from "./AccordionContentWithAccordion";
+import { useSidebarStore } from "@/stores/sideBarStore";
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(window.innerWidth >= 640);
-
+  const { isSidebarOpen, openSidebar, closeSidebar } = useSidebarStore();
   const [isAnimating, setIsAnimating] = useState(false);
 
   const accordionItems = [
@@ -41,33 +41,35 @@ export default function Sidebar() {
   ];
 
   const toggleAccordion = () => {
-    if (isOpen) {
+    if (isSidebarOpen) {
       setIsAnimating(true);
       setTimeout(() => {
-        setIsOpen(false);
+        closeSidebar();
         setIsAnimating(false);
       }, 300);
     } else {
-      setIsOpen(true);
+      openSidebar();
     }
   };
 
   return (
-    <section className="max-w-[328px] p-4">
+    <section className="relative z-0 sm:min-w-[328px] p-4">
       <header className="pt-[16px] pb-[16px] flex items-center justify-between hover:bg-[#F5F5F5]/90 transition duration-200">
         <img src={damDnLogo} alt="damDN Logo" className="h-8 w-auto" />
-        <Button
-          variant="ghost"
-          size="icon"
+        {window.innerWidth <= 768 && (
+          <Button
+            variant="ghost"
+            size="icon"
           className="justify-end-important"
           onClick={toggleAccordion}
         >
           <Menu className="w-6 h-6" />
         </Button>
+        )}
       </header>
       <div
         className={` transition-all duration-500 ease-in-out ${
-          isOpen || isAnimating
+          isSidebarOpen || isAnimating
             ? "max-h-[400px] opacity-100"
             : "max-h-0 opacity-0"
         }`}
